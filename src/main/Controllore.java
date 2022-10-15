@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 public class Controllore {
 	public boolean controlloMetodiBorsa() {
 		String nomeAtteso = "it.uniroma3.diadia.giocatore.Borsa";
-		System.out.println("daje");
 		try {
 			Class<?> classeDaControllare = Class.forName(nomeAtteso);
 			Method[] metodiDaControllare = classeDaControllare.getDeclaredMethods();
