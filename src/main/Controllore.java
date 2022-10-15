@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 public class Controllore {
 	public boolean controlloMetodiBorsa() {
 		String nomeAtteso = "it.uniroma3.diadia.giocatore.Borsa";
-
+		System.out.println("daje");
 		try {
 			Class<?> classeDaControllare = Class.forName(nomeAtteso);
 			Method[] metodiDaControllare = classeDaControllare.getDeclaredMethods();
@@ -102,7 +102,7 @@ public class Controllore {
 		System.out.println("Ok! I metodi di LabirintoBuilder sono chiamati correttamente");
 		return true;
 	}
-	
+
 	public boolean esistenzaInterfaceIo(){
 		String nomeAtteso = "it.uniroma3.diadia.IO";
 		try {
@@ -115,7 +115,7 @@ public class Controllore {
 			}else{
 				throw new ClassNotFoundException();
 			}
-			
+
 		} catch (ClassNotFoundException e) {
 			System.out.println("Attenzione! L'interface IO non esiste, o è stata chiamata diversamente oppure è nel package sbagliato. Assicurarsi che IO sia una interface e non una classe.");
 		} catch (NoSuchMethodException e) {
@@ -145,7 +145,7 @@ public class Controllore {
 		}
 		return risultato;
 	}
-	
+
 	public boolean esisteLabirinto() {
 		String nomeAtteso = "it.uniroma3.diadia.ambienti.Labirinto";
 		try {
