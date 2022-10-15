@@ -10,7 +10,6 @@ public class Starter {
 //        for(URL url: urls){
 //        	System.out.println(url.getFile());
 //        }
-		//COMMENTO TEST PER GIT
 		System.out.println("Test preliminari in avvio...");
 		Controllore c = new Controllore();
 		if(c.controlliPrimaDellaConsegna()){
