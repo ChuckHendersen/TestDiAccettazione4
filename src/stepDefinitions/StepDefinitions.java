@@ -304,10 +304,9 @@ public class StepDefinitions {
 			e.printStackTrace();
 		}
 	}
-	
-	@SuppressWarnings("unused")
-	@Given("carico un labirinto completo per testare una partita")
-	public void carico_un_labirinto_completo_per_testare_una_partita(){
+		
+	@Given("carico un labirinto completo per testare una partita HW4")
+	public void carico_un_labirinto_completo_per_testare_una_partita_hw4() {
 		Object labBuilderObj = null;
 		try {
 			Class<?> labBuilderClass = null;
@@ -323,22 +322,29 @@ public class StepDefinitions {
 			Method addStanzaBuia = labBuilderClass.getMethod("addStanzaBuia", String.class, String.class);
 			Method addAdiacenza = labBuilderClass.getMethod("addAdiacenza",String.class,String.class,String.class);
 			Method addAttrezzo = labBuilderClass.getMethod("addAttrezzo",String.class,int.class);
+			Method addMago = labBuilderClass.getMethod("addMago", String.class, String.class, String.class, int.class);
+			Method addStrega = labBuilderClass.getMethod("addStrega", String.class, String.class);
+			Method addCane = labBuilderClass.getMethod("addCane", String.class, String.class, String.class, int.class, String.class);
 			Method getLabirinto = labBuilderClass.getMethod("getLabirinto");
 			addStanzaIniziale.invoke(labBuilderObj,"stanza iniziale");
-			addAttrezzo.invoke(labBuilderObj, "aicrot", 2);
-			addStanzaVincente.invoke(labBuilderObj,"stanza vincente");
-			addStanzaBloccata.invoke(labBuilderObj, "stanza bloccata", "ovest","chiave");
-			addStanzaBuia.invoke(labBuilderObj, "stanza buia", "torcia");
-			addAttrezzo.invoke(labBuilderObj, "chiave", 2);
+			addAttrezzo.invoke(labBuilderObj, "torcia", 2);
+			addStanza.invoke(labBuilderObj, "stanza con mago");
+			addMago.invoke(labBuilderObj, "mago", "ciao", "ottocsib", 1);
+			addAdiacenza.invoke( labBuilderObj,"stanza iniziale", "stanza con mago", "est");
 			addStanzaMagica.invoke(labBuilderObj, "stanza magica", 2);
-			addAdiacenza.invoke(labBuilderObj, "stanza iniziale", "stanza buia", "est");
-			addAdiacenza.invoke(labBuilderObj, "stanza buia", "stanza iniziale", "ovest");
-			addAdiacenza.invoke(labBuilderObj, "stanza iniziale", "stanza magica", "sud");
-			addAdiacenza.invoke(labBuilderObj, "stanza magica", "stanza iniziale", "nord");
-			addAdiacenza.invoke(labBuilderObj, "stanza iniziale", "stanza bloccata", "nord");
-			addAdiacenza.invoke(labBuilderObj, "stanza bloccata", "stanza iniziale", "sud");
-			addAdiacenza.invoke(labBuilderObj, "stanza bloccata", "stanza vincente", "ovest");
-			addAdiacenza.invoke(labBuilderObj, "stanza vincente", "stanza bloccata", "est");
+			addAdiacenza.invoke( labBuilderObj, "stanza con mago","stanza magica", "est");
+			addStanza.invoke(labBuilderObj, "stanza con cane");
+			addCane.invoke(labBuilderObj,"cane","bau","chiave", 2,"biscotto");
+			addAdiacenza.invoke( labBuilderObj,"stanza magica","stanza con cane", "est");
+			addStanzaBuia.invoke(labBuilderObj, "stanza buia", "torcia");
+			addAdiacenza.invoke( labBuilderObj,"stanza con cane", "stanza buia", "est");
+			addStanza.invoke(labBuilderObj, "stanza con strega");
+			addStrega.invoke(labBuilderObj, "strega", "salve");
+			addAdiacenza.invoke( labBuilderObj,"stanza buia","stanca con strega", "est");
+			addStanzaBloccata.invoke(labBuilderObj, "stanza bloccata", "chiave", "est");
+			addAdiacenza.invoke( labBuilderObj,"stanza con strega", "stanza bloccata", "est");
+			addStanzaVincente.invoke(labBuilderObj,"stanza vincente");
+			addAdiacenza.invoke( labBuilderObj,"stanza bloccata", "stanza vincente", "est");
 			this.threadDiGioco = new Thread(new RunnableDiaDia(ioSim,getLabirinto.invoke(labBuilderObj)));
 		} catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException e) {
 			e.printStackTrace();
@@ -347,4 +353,5 @@ public class StepDefinitions {
 					+ "Labirinto builder non esiste come classe."));
 		}
 	}
+	   
 }
