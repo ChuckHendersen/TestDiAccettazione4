@@ -340,8 +340,8 @@ public class StepDefinitions {
 			addAdiacenza.invoke( labBuilderObj,"stanza con cane", "stanza buia", "est");
 			addStanza.invoke(labBuilderObj, "stanza con strega");
 			addStrega.invoke(labBuilderObj, "strega", "salve");
-			addAdiacenza.invoke( labBuilderObj,"stanza buia","stanca con strega", "est");
-			addStanzaBloccata.invoke(labBuilderObj, "stanza bloccata", "chiave", "est");
+			addAdiacenza.invoke( labBuilderObj,"stanza buia","stanza con strega", "est");
+			addStanzaBloccata.invoke(labBuilderObj, "stanza bloccata", "est", "chiave");
 			addAdiacenza.invoke( labBuilderObj,"stanza con strega", "stanza bloccata", "est");
 			addStanzaVincente.invoke(labBuilderObj,"stanza vincente");
 			addAdiacenza.invoke( labBuilderObj,"stanza bloccata", "stanza vincente", "est");
