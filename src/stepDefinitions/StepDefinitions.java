@@ -32,7 +32,7 @@ public class StepDefinitions {
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
 	static final private String MESSAGGIO_VITTORIA ="Hai vinto!";
-	
+
 	static final private String MESSAGGIO_ARRIVEDERCI = "Grazie di aver giocato!";
 
 	private String stringaDiBenvenuto;
@@ -57,7 +57,7 @@ public class StepDefinitions {
 		stringa.append("\n================================================\n");
 		return stringa.toString();
 	}
-	
+
 	@Given("il gioco e stato avviato")
 	public void il_gioco_e_stato_avviato() {
 		ioSim.setListaInput(listaInput);
@@ -101,7 +101,7 @@ public class StepDefinitions {
 		assertNotNull(stringaDiBenvenuto);
 		//Come posso verificare che effetivamente nello STDOUT appaia la stringa?
 	}
-	
+
 	@Then("hai vinto la partita")
 	public void hai_vinto_la_partita() {
 		//Dovrebbe contenere la stringa di benvenuto e quella di arrivederci
@@ -113,8 +113,8 @@ public class StepDefinitions {
 		System.out.println(corniciatore("ERRORE! La partita non va a buon fine."));
 		assertTrue(false);
 	}
-	
-	
+
+
 	@Then("il gioco stampa un messaggio di arrivederci")
 	public void il_gioco_stampa_un_messaggio_di_arrivederci() {
 		//Dovrebbe contenere la stringa di benvenuto e quella di arrivederci
@@ -286,10 +286,10 @@ public class StepDefinitions {
 			addAdiacenza.invoke(labBuilderObj, stanzaOrigine, stanzaDestinazione, direzione);
 			this.threadDiGioco = new Thread(new RunnableDiaDia(ioSim,getLabirinto.invoke(labBuilderObj)));
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 			System.out.println(corniciatore("ERRORE! Non e' possibile costruire un labirinto\n"
 					+ "Possibile causa:\n"
 					+ "Labirinto builder non esiste come classe."));
-			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
@@ -304,7 +304,7 @@ public class StepDefinitions {
 			e.printStackTrace();
 		}
 	}
-		
+
 	@Given("carico un labirinto completo per testare una partita HW4")
 	public void carico_un_labirinto_completo_per_testare_una_partita_hw4() {
 		Object labBuilderObj = null;
@@ -353,5 +353,62 @@ public class StepDefinitions {
 					+ "Labirinto builder non esiste come classe."));
 		}
 	}
-	   
+
+	@Given("un monolocale con personaggio {string} e con un attrezzo {string} di peso {string}")
+	public void un_monolocale_con_personaggio_e_con_un_attrezzo_di_peso(String tipoPersonaggio, String nomeAttrezzo, String pesoAttrezzo) {
+		Object labBuilderObj = null;
+		Class<?> labBuilderClass = null;
+		try {
+			labBuilderClass=Class.forName("it.uniroma3.diadia.ambienti.Labirinto$LabirintoBuilder");
+			Constructor<?> costruttoreLabBuilder = null;
+			costruttoreLabBuilder = labBuilderClass.getConstructor();
+			labBuilderObj=costruttoreLabBuilder.newInstance();
+			Method addStanzaIniziale = labBuilderClass.getMethod("addStanzaIniziale",String.class);
+			Method addStanzaVincente = labBuilderClass.getMethod("addStanzaVincente",String.class);
+			Method addStanza = labBuilderClass.getMethod("addStanza",String.class);
+			Method addStanzaMagica = labBuilderClass.getMethod("addStanzaMagica", String.class,int.class);
+			Method addStanzaBloccata = labBuilderClass.getMethod("addStanzaBloccata", String.class, String.class, String.class);
+			Method addStanzaBuia = labBuilderClass.getMethod("addStanzaBuia", String.class, String.class);
+			Method addAdiacenza = labBuilderClass.getMethod("addAdiacenza",String.class,String.class,String.class);
+			Method addAttrezzo = labBuilderClass.getMethod("addAttrezzo",String.class,int.class);
+			Method addMago = labBuilderClass.getMethod("addMago", String.class, String.class, String.class, int.class);
+			Method addStrega = labBuilderClass.getMethod("addStrega", String.class, String.class);
+			Method addCane = labBuilderClass.getMethod("addCane", String.class, String.class, String.class, int.class, String.class);
+			Method getLabirinto = labBuilderClass.getMethod("getLabirinto");
+			
+			addStanzaIniziale.invoke(labBuilderObj,"stanza con mago");
+			if(tipoPersonaggio.equals("Mago"))
+			addMago.invoke(labBuilderObj, "mago","ciao","attrezzoDaRegalare",1);
+			addAttrezzo.invoke(labBuilderObj, nomeAttrezzo, Integer.parseInt(pesoAttrezzo));
+			
+			this.threadDiGioco = new Thread(new RunnableDiaDia(ioSim,getLabirinto.invoke(labBuilderObj)));
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+			System.out.println(corniciatore("ERRORE! Non e' possibile costruire un labirinto\n"
+					+ "Possibile causa:\n"
+					+ "Labirinto builder non esiste come classe.\n"
+					+ "La classe labirinto non ha un costruttore 'No Args'."));
+		}
+	}
+
+	@Then("verifico che il personaggio {string} posi nella stanza {string} di peso {string}")
+	public void verifico_che_il_personaggio_posi_nella_stanza_di_peso(String tipoPersonaggio, String nomeAttrezzo, String pesoAttrezzo) {
+		boolean trovatoNomeSpada=false;
+		boolean trovatoPesoSpada=false;
+		List<String> outputList = this.ioSim.getOutputList();
+		int i=0;
+		while(!trovatoNomeSpada&&i<outputList.size()) {
+			System.out.println(outputList.get(i));
+			trovatoNomeSpada=outputList.get(i).contains(nomeAttrezzo);
+			i++;
+		}
+		while(trovatoNomeSpada&&!trovatoPesoSpada&&i<outputList.size()) {
+			System.out.println(outputList.get(i));
+			trovatoPesoSpada=outputList.get(i).contains(pesoAttrezzo);
+			i++;
+		}
+		assertTrue(trovatoNomeSpada);
+		assertTrue(trovatoPesoSpada);
+	}
+
 }
