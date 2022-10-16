@@ -2,7 +2,7 @@
 Feature: test di prendi e posa
 
 	@testPrendiEPosa
-	Scenario: monolocale con attrezzo 
+	Scenario: Labirinto di default con osso in atrio
 		Given carico il comando "guarda"
 		And carico il comando "prendi osso"
 		And carico il comando "guarda"
