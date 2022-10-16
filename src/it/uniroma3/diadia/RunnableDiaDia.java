@@ -4,29 +4,14 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-//import it.uniroma3.diadia.ambienti.Labirinto;
 
 public class RunnableDiaDia implements Runnable{
-
-	//private DiaDia diadia;
 
 	private Object diadiaObj = null;
 	private Class<?> classeDiaDia = null;
 	private Class<?> classeIO = null;
 	private Method metodoGioca = null;
 	private Class<?> classeLabirinto = null;
-
-	//	public RunnableDiaDia (IO io) {
-	//		this.diadia = new DiaDia(io);
-	//	}
-
-	//	public RunnableDiaDia (IO io, Labirinto maze) {
-	//		this.diadia = new DiaDia(io,maze);
-	//	}
-	//	
-	//	public RunnableDiaDia (IO io, Labirinto maze, int cfu) {
-	//		this.diadia = new DiaDia(io,maze,cfu);
-	//	}
 
 	public RunnableDiaDia (IO io) {
 		try {
@@ -39,14 +24,17 @@ public class RunnableDiaDia implements Runnable{
 					this.diadiaObj=c.newInstance(io);
 				}
 			}
-
+			if(diadiaObj==null) {
+				throw new InstantiationException();
+			}
+			
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			System.out.println("Qualcosa e' andato storto. Assicurarsi di aver posizionato il proprio diadia nella cartella corretta e che \nControlliPrimaDellaConsegna.jar dia esito completamente positivo... Si prega di leggere le istruzioni d'uso.");
+			System.out.println("Qualcosa e' andato storto. Assicurarsi di avere un costruttore per la Classe DiaDia\nche riceva come parametro un oggetto di tipo IO.");
 			System.out.println("Il programma ora si interrompera'.");
 			System.exit(1);
 		}
 	}
-	
+
 	public RunnableDiaDia (IO io,Object labirinto) {
 		try {
 			this.classeDiaDia = Class.forName("it.uniroma3.diadia.DiaDia");
@@ -59,9 +47,11 @@ public class RunnableDiaDia implements Runnable{
 					this.diadiaObj=c.newInstance(io,labirinto);
 				}
 			}
+			if(diadiaObj==null) {
+				throw new InstantiationException();
+			}
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			System.out.println("Qualcosa e' andato storto. Assicurarsi di aver posizionato il proprio diadia nella cartella corretta e che ControlliPrimaDellaConsegna.jar dia esito completamente positivo...\nSi prega di leggere le istruzioni d'uso.");
-			//System.out.println("Test");
+			System.out.println("Qualcosa e' andato storto. Assicurarsi di avere un costruttore di DiaDia che accetti l'IO e un Labirinto.");
 			System.out.println("Il programma ora si interrompera'.");
 			System.exit(1);
 		}
@@ -71,13 +61,8 @@ public class RunnableDiaDia implements Runnable{
 	public void run() {
 		try {
 			metodoGioca.invoke(diadiaObj);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			System.out.println("Qualcosa e' andato storto.\nIl metodo gioca non esiste o prende parametri fuori dalle specifiche.");
 		}
 	}
-
 }

@@ -64,7 +64,8 @@ public class IOSimulator implements IO {
 	}
 	
 	/*
-	 * Metodo polimorfo che aggiunge ad una lista l'output corrente generato dal gioco
+	 * Metodo polimorfo che aggiunge ad una lista di stringhe l'output corrente generato dal gioco
+	 * @param msg messaggio da memorizzare nella collezione 
 	 */
 	
 	@Override
@@ -74,7 +75,7 @@ public class IOSimulator implements IO {
 	
 	/*
 	 * Metodo che legge i comandi dalla lista di input e li fornisce al gioco.
-	 * Se la lista di comandi � vuota o si � arrivati all fine di essa, viene
+	 * Se la lista di comandi e' vuota o si �e'arrivati all fine di essa, viene
 	 * messo in coda un ultimo comando "fine" in modo da fermare il gioco
 	 */
 	@Override
