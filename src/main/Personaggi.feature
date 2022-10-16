@@ -41,3 +41,19 @@ Feature: Verifica funzionalita personaggi
 		And carico il comando "guarda"
 		And il gioco e stato avviato
 		Then verifico lo spostamento da "stanza con strega" a "un attrezzo" verso "est"
+		
+	#se si interagisce con il cane, dovrebbe levarti CFU e portare alla morte del personaggio
+	Scenario: Test funzionalita di attacco del cane
+		Given un monolocale con personaggio "Cane" 
+		And carico il comando "interagisci" per "21" volte
+		And il gioco e stato avviato
+		Then viene mostrato il messaggio di morte
+		And il gioco si chiude
+		
+	#dando qualcosa al cane, lui in cambio svela un oggetto
+	Scenario: Test di funzionalita regalo al cane
+		Given un monolocale con personaggio "Cane" a cui piace il "biscotto" e in cambio da una "spada" di peso "2"
+		And carico il comando "prendi biscotto"
+		And carico il comando "regala biscotto"
+		And il gioco e stato avviato 
+		Then verifico che il personaggio "Cane" posi nella stanza "spada" di peso "2"

@@ -91,6 +91,9 @@ public class Controllore {
 			Method addStanzaBuia = labBuilderClass.getMethod("addStanzaBuia", String.class, String.class);
 			Method addAdiacenza = labBuilderClass.getMethod("addAdiacenza",String.class,String.class,String.class);
 			Method addAttrezzo = labBuilderClass.getMethod("addAttrezzo",String.class,int.class);
+			Method addMago = labBuilderClass.getMethod("addMago", String.class, String.class, String.class, int.class);
+			Method addStrega = labBuilderClass.getMethod("addStrega", String.class, String.class);
+			Method addCane = labBuilderClass.getMethod("addCane", String.class, String.class, String.class, int.class, String.class);
 			Method getLabirinto = labBuilderClass.getMethod("getLabirinto");
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
