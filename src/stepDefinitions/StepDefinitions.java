@@ -75,11 +75,12 @@ public class StepDefinitions {
 			this.getLabirinto = labBuilderClass.getMethod("getLabirinto");
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
-			System.out.println(corniciatore("ERRORE! Non e' possibile costruire un labirinto\n"
+			System.out.println(corniciatore("ERRORE! Non e' possibile proseguire con i test\n"
 					+ "Possibile causa:\n"
 					+ "Labirinto builder non esiste come classe.\n"
-					+ "La classe labirinto non ha un costruttore 'No Args'.\n"
-					+ "Almeno un metodo non esiste per la classe LabirintoBuilder.\n"
+					+ "La classe labirintoBuilder non ha un costruttore 'No Args'.\n"
+					+ "La classe LabirintoBuilder non e' annidata all'interno di Labirinto.\n"
+					+ "Almeno un metodo richiesto non esiste per la classe LabirintoBuilder.\n"
 					+ "Almeno un metodo ha parametri diversi da quelli specificati.\n"));
 			System.exit(1);
 		}
