@@ -306,12 +306,10 @@ public class StepDefinitions {
 			this.threadDiGioco = new Thread(new RunnableDiaDia(ioSim,getLabirinto.invoke(labBuilderObj)));
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
-
+			System.out.println(corniciatore("ERRORE! Non e' possibile costruire un labirinto\n"
+					+ "Possibile causa:\n"
+					+ "Labirinto builder non esiste come classe."));
 		}
-
-		System.out.println(corniciatore("ERRORE! Non e' possibile costruire un labirinto\n"
-				+ "Possibile causa:\n"
-				+ "Labirinto builder non esiste come classe."));
 	}
 
 	@Given("carico un labirinto completo per testare una partita HW4")
@@ -427,8 +425,6 @@ public class StepDefinitions {
 			trovataSpadaRegalato=outputList.get(i).contains(nomeAttrezzo)&&outputList.get(i).contains(pesoAttrezzo);
 			i++;
 		}
-		for(String s:ioSim.getOutputList())
-			System.out.println(s);
 		assertTrue(trovataSpadaRegalato);
 	}
 
