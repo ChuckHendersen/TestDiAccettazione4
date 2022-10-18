@@ -51,7 +51,7 @@ public class RunnableDiaDia implements Runnable{
 				throw new InstantiationException();
 			}
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			System.out.println("Qualcosa e' andato storto. Assicurarsi di avere un costruttore di DiaDia che accetti l'IO e un Labirinto.");
+			System.out.println("Qualcosa e' andato storto. Assicurarsi di avere un costruttore di DiaDia che accetti come parametri\nun oggetto di tipo IO e uno di tipo Labirinto");
 			System.out.println("Il programma ora si interrompera'.");
 			System.exit(1);
 		}
@@ -63,6 +63,8 @@ public class RunnableDiaDia implements Runnable{
 			metodoGioca.invoke(diadiaObj);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			System.out.println("Qualcosa e' andato storto.\nIl metodo gioca non esiste o prende parametri fuori dalle specifiche.");
+			System.out.println("Il programma ora si interrompera'.");
+			System.exit(1);
 		}
 	}
 }
