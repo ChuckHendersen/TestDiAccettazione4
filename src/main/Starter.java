@@ -1,14 +1,16 @@
 package main;
 
-public class Starter {
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
 
+public class Starter {
 	public static void main(String[] args) throws Throwable {
 		System.out.println("Test preliminari in avvio...");
-		Controllore c = new Controllore();
-		if(c.controlliPrimaDellaConsegna()){
+		JUnitCore c = new JUnitCore();
+		Result risultati=c.run(Controllore.class);
+		if(risultati.getFailureCount()==0){
 			System.out.println("Test preliminari passati con successo!");
 			System.out.println("Test di accettazione in avvio...");
-			//Chiamata al main di cucumber
 			io.cucumber.core.cli.Main.main(new String[]{"-g", "classpath:","-m","-p","pretty"});
 		}else{
 			System.out.println("ATTENZIONE! uno o piu' dei controlli prima della consegna "
