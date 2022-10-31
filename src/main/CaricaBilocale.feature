@@ -3,9 +3,10 @@ Feature: Iniezioni di labirinto
   @testBuilder
   Scenario: Labirinto bilocale
   	Given carico un bilocale composto da "Stanza Iniziale" collegata a "nord" alla "Stanza Vincente"
-  	Given carico il comando "guarda"
-   	And carico il comando "vai nord"
-   	And carico il comando "guarda"
-   	And il gioco e stato avviato
+  	Given inserisco il comando "guarda" in coda
+   	And inserisco il comando "vai nord" in coda
+   	And inserisco il comando "guarda" in coda
+   	And il gioco viene avviato
    	Then verifico lo spostamento da "Stanza Iniziale" a "Stanza Vincente" verso "nord"
-  	Then il gioco si chiude
+  	And hai vinto la partita
+  	And il gioco si chiude

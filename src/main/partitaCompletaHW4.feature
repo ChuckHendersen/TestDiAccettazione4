@@ -3,27 +3,27 @@ Feature: partita completa HW4
   @testBuilder
   Scenario: Labirinto completo
   	Given carico un labirinto completo per testare una partita HW4
-  	And carico il comando "prendi torcia"
-  	And carico il comando "vai est"
-  	And carico il comando "saluta mago"
-  	And carico il comando "interagisci"
-  	And carico il comando "prendi ottocsib"
-  	And carico il comando "vai est"
-  	And carico il comando "posa ottocsib"
-  	And carico il comando "guarda"
-  	And carico il comando "prendi ottocsib"
-  	And carico il comando "posa ottocsib"
-  	And carico il comando "prendi ottocsib"
-  	And carico il comando "posa ottocsib"
-  	And carico il comando "prendi biscotto"
-  	And carico il comando "vai est"
-  	And carico il comando "regala biscotto"
-  	And carico il comando "vai est"
-  	And carico il comando "posa torcia"
-  	And carico il comando "vai est"
-  	And carico il comando "interagisci"
-  	And carico il comando "vai est"
-  	And carico il comando "posa chiave"
-  	And carico il comando "vai est"
-  	And il gioco e stato avviato
+  	And inserisco il comando "prendi torcia" in coda
+  	And inserisco il comando "vai est" in coda
+  	And inserisco il comando "saluta mago" in coda
+  	And inserisco il comando "interagisci" in coda
+  	And inserisco il comando "prendi ottocsib" in coda
+  	And inserisco il comando "vai est" in coda
+  	And inserisco il comando "posa ottocsib" in coda
+  	And inserisco il comando "guarda" in coda
+  	And inserisco il comando "prendi ottocsib" in coda
+  	And inserisco il comando "posa ottocsib" in coda
+  	And inserisco il comando "prendi ottocsib" in coda
+  	And inserisco il comando "posa ottocsib" in coda
+  	And inserisco il comando "prendi biscotto" in coda
+  	And inserisco il comando "vai est" in coda
+  	And inserisco il comando "regala biscotto" in coda
+  	And inserisco il comando "vai est" in coda
+  	And inserisco il comando "posa torcia" in coda
+  	And inserisco il comando "vai est" in coda
+  	And inserisco il comando "interagisci" in coda
+  	And inserisco il comando "vai est" in coda
+  	And inserisco il comando "posa chiave" in coda
+  	And inserisco il comando "vai est" in coda
+  	And il gioco viene avviato
    	Then hai vinto la partita
